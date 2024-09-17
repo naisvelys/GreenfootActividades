@@ -21,29 +21,35 @@ public class Cohete extends Actor
     public void act()
     {
         if(Greenfoot.isKeyDown("d")){
-          setLocation(getX()+5, getY());  
+          setLocation(getX()+3, getY()); 
+          setRotation(360);
         }
-        if(Greenfoot.isKeyDown("a")){
-          setLocation(getX()-5, getY());  
+        else if(Greenfoot.isKeyDown("a")){
+          setLocation(getX()-3, getY());
+           setRotation(180);
         }
-        if(Greenfoot.isKeyDown("w")){
-          setLocation(getX(), getY()-5);  
+        else if(Greenfoot.isKeyDown("w")){
+          setLocation(getX(), getY()-3); 
+           setRotation(270);
         }
-        if(Greenfoot.isKeyDown("s")){
-          setLocation(getX(), getY()+5);  
+        else if(Greenfoot.isKeyDown("s")){
+          setLocation(getX(), getY()+3); 
+           setRotation(90);
         }
         fireProjectile();
     }
         // Add your action code here.
-    public void fireProjectile()
+        public void fireProjectile()
     {
-        if(Greenfoot.isKeyDown("space") && canFire == true){
+        
+         if(Greenfoot.isKeyDown("space") && canFire == true){
             getWorld().addObject(new Projectile(), getX(), getY()-30);
             canFire = false;
             
         } else if(!Greenfoot.isKeyDown("space")){
-            canFire =true;   
+        canFire =true;   
         }
-
     }
-        }
+     
+    
+      }

@@ -5,6 +5,13 @@ class Projectile extends Actor
     /**
      * Declaraciones
      */
+    
+    private int direccion;
+    
+    public void addedToWorld(World world){
+        direccion = getWorld().getObjects(Cohete.class).get(0).getRotation();
+    }
+    
     /**
      * Constructor
      */
@@ -20,8 +27,8 @@ class Projectile extends Actor
      */
     public void act() 
     {
-        projectileMove();
-        removeFromWorld();
+        movimientoProyectil();
+        quitarDelMundo();
     } 
 
     /**
@@ -31,21 +38,38 @@ class Projectile extends Actor
     {
     }
 
-    /**
-     * Metodos de Projectile completos y con elementos completos no estandares.
-     */
-
-    public void projectileMove()
-    {
-        setLocation(getX(), getY() - 10);
-    }
-
-    public void removeFromWorld()
-    {
-        if(getY() == 0)
-        {
-            getWorld().removeObject(this);
+    public void movimientoProyectil()
+     {
+         if(direccion == 270){
+         setLocation(getX(), getY()-10);
+        }
+         else if (direccion == 90){
+         setLocation(getX(), getY()+10); 
+         }
+         else if (direccion == 360 || direccion == 0){
+         setLocation(getX()+10, getY());   
+         setRotation(90);
+         }
+        else if (direccion == 180){
+        setLocation(getX()-10, getY());
+        setRotation(180);
+        }
+     }
+    
+    public void projeyectiloMove(){
+        setLocation(getX(),getY()-20);
+        if(getY() == 0) {
+             getWorld().removeObject(this);
         }
     }
-
+    
+    
+    
+    public void quitarDelMundo()
+    {
+      if(getY() == 0 || getX() == 0 || getX() == getWorld().getWidth()-1 || getY() == getWorld().getHeight()-1)
+      {
+          getWorld().removeObject(this);
+      }
+    }
 }
